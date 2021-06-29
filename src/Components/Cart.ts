@@ -54,4 +54,13 @@ class Cart implements ICart {
     });
     return finalPrice;
   }
+  addTheSameItemToBasket(item: CartItem, repeat: number): CartItem[] {
+    return this.basket.concat(Array(repeat).fill(item));
+  }
+  deleteTheSameFromBasket(item: CartItem, repeat: number): CartItem[] {
+    const filteredList = this.basket.filter(
+      (itemB) => itemB.name === item.name
+    );
+    return this.basket.concat(filteredList.slice(0, repeat));
+  }
 }
