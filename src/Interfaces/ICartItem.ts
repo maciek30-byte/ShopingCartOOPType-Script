@@ -1,3 +1,4 @@
+import {ChangeInCartItem} from "./allTypes";
 interface ICartItem {
   getId(): string;
   name: string;
@@ -8,7 +9,9 @@ interface ICartItem {
 
   setPrice(newPrice: number): void;
   setDiscount(newDiscount: number): void;
-  setNameOfValue(valueToChange: string, newValue: string): void;
+  setNameOfProperty(valueToChange:ChangeInCartItem , newValue: string): void;
+  calculateTotalValue():number
+
 }
 
 export default ICartItem;

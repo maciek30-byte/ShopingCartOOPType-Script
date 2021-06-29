@@ -1,0 +1,1 @@
+export type ChangeInCartItem = 'price'| 'name'| 'discount'
