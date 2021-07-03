@@ -4,19 +4,19 @@ import { v4 as uuidv4 } from "uuid";
 import Validator from "./Validator";
 
 class Cart implements ICart {
-  id: string;
+  _id: string;
   basket: CartItem[];
 
   constructor(public basketDiscount: number, public discountCode: number) {
-    this.id = uuidv4();
+    this._id = uuidv4();
     this.basket = [];
   }
 
-  getId(): string {
-    return this.id;
+  get id() {
+    return this._id;
   }
 
-  addToBasket(...items: CartItem[]) {
+  addToBasket(...items: CartItem[]): void | never {
     if (items.length === 0) throw new Error("you have to add something");
     items.forEach((item) => {
       if (Validator.checkThatExist(item, this.basket)) {
@@ -29,7 +29,7 @@ class Cart implements ICart {
     });
   }
 
-  deleteFromBasket(...items: CartItem[]): void {
+  deleteFromBasket(...items: CartItem[]): void | never {
     if (items.length === 0) throw new Error("you have to add something");
     items.forEach((item) => {
       if (!Validator.checkThatExist(item, this.basket)) {
@@ -44,14 +44,14 @@ class Cart implements ICart {
 
   calculateBasket(): number {
     const totalDiscount: number = this.basketDiscount + this.discountCode;
-    const arrayToCalculate: number[] = [];
-    this.basket.forEach((item) => {
-      arrayToCalculate.push(item.calculateTotalValue());
-    });
+    // const arrayToCalculate: number[] = [];
+    // this.basket.forEach((item) => {
+    //   arrayToCalculate.push(item.calculateTotalValue());
+    // });
 
-    const finalPrice: number = arrayToCalculate.reduce((acc, currElement) => {
-      return (acc += currElement);
-    });
+    const finalPrice: number = this.basket.reduce((acc, item) => {
+      return (acc += item.calculateTotalValue());
+    }, 0);
     return finalPrice;
   }
   addTheSameItemToBasket(item: CartItem, repeat: number): CartItem[] {
@@ -63,4 +63,6 @@ class Cart implements ICart {
     );
     return this.basket.concat(filteredList.slice(0, repeat));
   }
+
+  // brak metody do zmiany ilości
 }

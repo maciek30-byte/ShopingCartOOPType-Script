@@ -2,20 +2,25 @@ import ICartItem from "../Interfaces/ICartItem";
 import { v4 as uuidv4 } from "uuid";
 import { ChangeInCartItem } from "../Interfaces/allTypes";
 
+
+// cartitem = product + qty
 class CartItem implements ICartItem {
   id: string;
-  constructor(
-    public name: string,
-    public category: string,
-    public price: number,
-    public discount: number,
-    public quantity: number
-  ) {
+  name:string;
+  category:string
+  price:number
+  discount:number
+  quantity:number
+  constructor(id:string,name:string,category:string,price:number,discount:number,quantity:number) {
+   //@ToDo add Validator !!!!!!!!!
     this.id = uuidv4();
+    this.name = name;
+    this.category = category;
+    this.price = price;
+    this.discount = discount;
+    this.quantity = quantity
   }
-  getId(): string {
-    return this.id;
-  }
+
   setPrice(newPrice: number) {
     if (newPrice <= 0) throw new Error("That is for free or worse.....");
     this.price = newPrice;
