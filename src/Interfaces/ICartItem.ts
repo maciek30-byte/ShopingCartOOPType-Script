@@ -1,17 +1,10 @@
-import {ChangeInCartItem} from "./allTypes";
+import IProduct from "./IProduct";
+
 interface ICartItem {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  discount: number;
-  quantity: number;
+ product:IProduct
+  quantity:number
 
-  setPrice(newPrice: number): void;
-  setDiscount(newDiscount: number): void;
-  setNameOfProperty(valueToChange:ChangeInCartItem , newValue: string|number): void;
-  calculateTotalValue():number
-
+  changeQuantity(newQuantity:number): void | never
 }
 
 export default ICartItem;

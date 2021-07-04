@@ -1,1 +1,1 @@
-export type ChangeInCartItem = 'price'| 'name'| 'discount'
+export type ChangeInProduct = 'price'| 'name'| 'discount' | 'category'
