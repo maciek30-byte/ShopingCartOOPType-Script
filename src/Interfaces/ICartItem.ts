@@ -1,14 +1,10 @@
-interface ICartItem {
-  getId(): string;
-  name: string;
-  category: string; // osobna klasa??
-  price: number;
-  discount: number;
-  quantity: number;
+import IProduct from "./IProduct";
 
-  setPrice(newPrice: number): void;
-  setDiscount(newDiscount: number): void;
-  setNameOfValue(valueToChange: string, newValue: string): void;
+interface ICartItem {
+ product:IProduct
+  quantity:number
+
+  changeQuantity(newQuantity:number): void | never
 }
 
 export default ICartItem;
